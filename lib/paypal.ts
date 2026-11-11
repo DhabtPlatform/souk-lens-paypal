@@ -153,7 +153,7 @@ export async function createOrder(
     unitAmount: q(i.unitPrice, factor),
   }));
   const itemTotal = lineItems.reduce((s, i) => s + i.unitAmount * Number(i.quantity), 0);
-  const shippingQ = q(Math.max(0, shipping), rate);
+  const shippingQ = q(Math.max(0, shipping), factor);
   const total = itemTotal + shippingQ;
 
   const body = {
