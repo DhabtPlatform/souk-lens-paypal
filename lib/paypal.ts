@@ -47,8 +47,10 @@ function paypalBase(): string {
 }
 
 // ---- configuration ----------------------------------------------------------
-const CID = process.env.PAYPAL_CLIENT_ID ?? "";
-const CSECRET = process.env.PAYPAL_CLIENT_SECRET ?? "";
+// Trim: a pasted trailing space/newline in a host's env value silently breaks
+// Basic auth with "invalid_client".
+const CID = (process.env.PAYPAL_CLIENT_ID ?? "").trim();
+const CSECRET = (process.env.PAYPAL_CLIENT_SECRET ?? "").trim();
 
 // PayPal settles a fixed set of currencies — EGP (our sellers' local currency)
 // is not one of them. Unsupported carts convert to PAYPAL_CURRENCY at a labeled
