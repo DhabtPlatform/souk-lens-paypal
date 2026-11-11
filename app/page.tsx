@@ -527,7 +527,11 @@ export default function Page() {
     try { savedDefault = localStorage.getItem("souk-lens-default-img") || ""; } catch { /* ignore */ }
     const img = savedDefault || (pub ? "/stall-veg.jpg" : SAMPLE);
     setTab("analyze"); setImageUrl(img); setImageLabel(savedDefault ? "" : (pub ? "" : "avocado"));
-    postJson("/api/lens", { imageUrl: img, prompt: savedDefault ? "market goods" : (pub ? "mixed vegetables market stall" : "avocado"), lang: ar ? "ar-EG" : "en", country: country.code, currency: country.currency });
+    // Instant replay: the bundled stall photo has a real measured run on file
+    // (data/golden-run.json) — replay it in <1s, honestly labeled in the UI.
+    // Any other image (seller default, localhost sample) still runs live.
+    const replayable = pub && !savedDefault;
+    postJson(replayable ? "/api/golden-run" : "/api/lens", { imageUrl: img, prompt: savedDefault ? "market goods" : (pub ? "mixed vegetables market stall" : "avocado"), lang: ar ? "ar-EG" : "en", country: country.code, currency: country.currency });
   };
   function runStall(src: string) {
     setTab("analyze"); setImageUrl(src); setImageLabel(""); setScope("all"); setFocusNames("");
@@ -892,6 +896,7 @@ export default function Page() {
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-xl font-black">{ar ? "النتيجة" : "Result"}</h2>
               <Badge variant={live ? "success" : "secondary"}>{live ? t("live", lang) : t("mock", lang)}</Badge>
+              {(raw as { replayed?: boolean } | null)?.replayed ? <Badge variant="gold">{ar ? "⚡ إعادة عرض فورية لتشغيل حقيقي مُقاس — زر Analyze لتشغيل جديد" : "⚡ Instant replay of a real measured run — Analyze for a fresh one"}</Badge> : null}
               {focusEcho ? <Badge variant="accent" dir="auto">{ar ? "التركيز: " : "Focus: "}{focusEcho.slice(0, 60)}</Badge> : null}
               <span className="text-xs text-muted-foreground">segmentation + listing + studio image + voice (ids via env)</span>
               {results.length ? <Button className="ms-auto" variant="accent" onClick={() => addAll(results)}><CheckCheck />{ar ? `حفظ الكل (${results.length})` : `Save all (${results.length})`}</Button> : null}
