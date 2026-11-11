@@ -46,12 +46,27 @@
 
 ## Shot checklist (real app footage only)
 - [ ] One-click demo run + proof bar (LIVE label)
-- [ ] Box map tap → listing → Add to cart
-- [ ] Cart → **PayPal sandbox buttons → popup → approve → CAPTURED id** ← the money shot
+- [x] **VERIFIED Nov 11** — Box map tap → listing → Add to cart (Handmade brass lamp, 890 EGP cart)
+- [x] **VERIFIED Nov 11** — Cart → **PayPal sandbox buttons → popup → buyer login → review 17.80 USD (890÷50 exact) → CAPTURED id `SLM58587TG8887O9H`** ← the money shot
 - [ ] Buyer page PayPal button (single product)
 - [ ] Smart Market: preset → 3 lists → approve → invoice → add to cart
-- [ ] Seller dashboard after capture (revenue moved)
+- [ ] Seller dashboard after capture (revenue + stock moved)
 - [ ] `/api/health` response on screen
+
+## Clean-recording rules for the popup scene (learned from the Nov 11 test take)
+
+The Nov 11 test capture (Recording 2026-11-11 225020.mp4) proves the flow end-to-end
+but must NOT be used raw — it leaks private data on screen:
+
+- ❌ Browser password-manager dropdown showed **personal emails** (~0:10–0:14)
+- ❌ Windows clipboard-history panel showed the **sandbox password in plain text** (~0:15–0:20)
+
+Re-record the popup portion with:
+1. **F11 fullscreen** (hides tab bar/URL bar; the film frame is 1920×1080 — the test take is 1872×860)
+2. **Never open the password manager or Win+V clipboard panel on camera**
+3. Type the `sb-…@personal.example.com` buyer email manually; paste the password in one keystroke without opening any panel
+4. Keep on screen: the **conversion toast** ("charged as USD … labeled fixed conversion") and the **"PayPal sandbox" badge** — they are required honesty labels
+5. Golden shots to keep identical to the test take: the review screen (17.80 USD, John Doe, Test Store), the processing spinner, and the confirmation ("Paid with PayPal" + capture id + "order recorded in seller sales")
 
 ## Honesty rules for the film
 - Sandbox only — say it on screen ("PayPal sandbox").
