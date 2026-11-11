@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Cairo, Inter, Tajawal } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 
-const tajawal = Tajawal({ subsets: ["arabic", "latin"], weight: ["400", "500", "700", "800", "900"], variable: "--font-tajawal", display: "swap" });
-const cairo = Cairo({ subsets: ["arabic", "latin"], weight: ["400", "600", "700", "800"], variable: "--font-cairo", display: "swap" });
-const inter = Inter({ subsets: ["latin"], weight: ["400", "600", "700", "800", "900"], variable: "--font-inter", display: "swap" });
+// Fonts load via <link> (Google Fonts CDN) instead of next/font/google —
+// next/font fetches font data at build time and fails on hosts where that
+// request is blocked or rate-limited. Literal family names are mapped to the
+// same --font-* variables in globals.css, so nothing else changes.
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
   ?? (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : undefined)
@@ -27,7 +27,15 @@ export const viewport: Viewport = { themeColor: "#7c5cff", width: "device-width"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning className={`${tajawal.variable} ${cairo.variable} ${inter.variable}`}>
+    <html lang="en" dir="ltr" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body>
         {children}
         <Toaster richColors position="top-center" toastOptions={{ style: { fontFamily: "inherit" } }} />

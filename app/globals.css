@@ -27,6 +27,11 @@
 }
 
 :root {
+  /* Font families (loaded via <link> in app/layout.tsx) — same --font-* names
+     the previous next/font/google setup provided. */
+  --font-tajawal: "Tajawal", sans-serif;
+  --font-cairo: "Cairo", sans-serif;
+  --font-inter: "Inter", sans-serif;
   --radius: 0.9rem;
   --background: #0b0b10;
   --foreground: #f6f6f8;
