@@ -1,0 +1,35 @@
+# Deps & build
+node_modules/
+.next/
+out/
+dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# Env & secrets — never push real keys
+.env
+.env.local
+.env.*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# opencode sessions
+.local/
+
+# Runtime database (created automatically, capped, never committed)
+data/products.json
+
+# Demo video production artifacts (final MP4 kept locally, never committed)
+video-output/
+
+# Personal session automation — local only, never public
+AGENTS.md
+DEMO_SCRIPT.md
+
+# Local security-tool state (hook artifacts) — never public
+.mimosa/

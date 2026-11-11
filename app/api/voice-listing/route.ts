@@ -1,0 +1,36 @@
+import { NextRequest, NextResponse } from "next/server";
+import { cleanProductShot, listingFromText, MODEL_IDS } from "@/lib/ai";
+import { extractItems, extractStudioImage, extractText } from "@/lib/extract";
+import { normalizeProducts } from "@/lib/product";
+
+// POST { transcript, country, currency, imageUrl? } -> used by voice flow after transcription (and direct text fallback).
+// imageUrl = optional REAL seller photo — leads the gallery for buyer trust.
+export async function POST(req: NextRequest) {
+  try {
+    const { transcript, country = "EG", currency = "EGP", imageUrl, imageMode } = await req.json();
+    if (!transcript || typeof transcript !== "string" || !transcript.trim()) return NextResponse.json({ error: "transcript required" }, { status: 400 });
+    const mode = imageMode === "real" || imageMode === "generated" ? imageMode : "both";
+    const realImage = mode !== "generated" && typeof imageUrl === "string" && imageUrl ? imageUrl : undefined;
+    const t1 = Date.now();
+    const listing = await listingFromText(transcript, country, currency);
+    const sparkMs = Date.now() - t1;
+    const text = extractText(listing);
+    const raws = extractItems(listing, text);
+    const t2 = Date.now();
+    const studioImage = mode === "real" ? null : extractStudioImage(await cleanProductShot(String(raws[0]?.name_en ?? transcript.slice(0, 80))).catch((e) => ({ error: String(e) })));
+    const studioMs = Date.now() - t2;
+    const products = normalizeProducts(raws, { source: { type: "voice", transcript }, country, currency, studioImage: studioImage ?? undefined, realImage });
+    if (studioImage && products[0]) products[0].images = [studioImage, ...products[0].images.filter((i) => i !== studioImage)];
+    return NextResponse.json({
+      ok: true, live: Boolean(process.env.MODEL_API_KEY), transcript, products, items: products, studioImage, analysisText: text,
+      note: mode === "real" && !realImage ? "اخترت الصور الحقيقية فقط — أرفق صورة حقيقية أولًا لتتصدر الإعلان. / Real-only mode: attach a real photo first." : undefined,
+      trace: [
+        { model: process.env.VOICE_MODEL ?? "voice", role: "صوت → نص (من التسجيل أو النص المكتوب)", ms: 0, live: Boolean(process.env.MODEL_API_KEY), status: "ok" },
+        { model: MODEL_IDS.listing, role: "إعلان كامل باسم فعلي وأسعار ومتغيرات", ms: sparkMs, live: Boolean(process.env.MODEL_API_KEY), status: products.length ? "ok" : "empty" },
+        { model: MODEL_IDS.image, role: "صورة ستوديو مولدة للمنتج", ms: studioMs, live: Boolean(process.env.MODEL_API_KEY), status: studioImage ? "ok" : "skipped" },
+      ],
+    });
+  } catch (e) {
+    return NextResponse.json({ ok: false, error: String(e) }, { status: 500 });
+  }
+}
