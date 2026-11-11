@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { PaypalMonogram, PaypalWordmark } from "@/components/brand/paypal-logo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -320,6 +321,14 @@ export function SmartMarket({
             </div>
             <Separator />
             <div className="flex items-center justify-between text-lg font-black"><span>{ar ? "الإجمالي المستحق" : "Grand total"}</span><span className="text-accent">{formatPrice(approved.total, currency)}</span></div>
+            <p className="flex items-center justify-center gap-1.5 text-[11px] text-muted-foreground">
+              {ar ? "الدفع آمن عبر" : "Secure checkout with"}
+              <span className="inline-flex items-center gap-1 rounded-full border border-black/10 bg-white px-2 py-0.5 shadow-sm">
+                <PaypalMonogram size={12} />
+                <PaypalWordmark className="text-[11px]" />
+              </span>
+              {ar ? "— أزرار بايبال الحقيقية في السلة (sandbox)" : "— real PayPal buttons at the cart (sandbox)"}
+            </p>
             <div className="flex flex-col gap-2 sm:flex-row">
               {!(approved.items.length && approved.items.some((i) => (i.source as { label?: string } | undefined)?.label === "external")) ? (
                 <Button size="lg" className="flex-1" onClick={() => { onAddToCart(approved.items); toast.success(ar ? "اتضافت للسلة — افتح السلة من فوق للدفع" : "Added to cart"); }}>

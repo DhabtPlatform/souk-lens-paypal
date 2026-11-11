@@ -1,5 +1,6 @@
 "use client";
 import { LogoLockup } from "@/components/brand/logo";
+import { PaypalChip } from "@/components/brand/paypal-logo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -25,6 +26,7 @@ export function AppHeader({
         <a href="/" className="min-w-0 shrink-0" aria-label="Souk Lens home">
           <LogoLockup lang={lang} compact />
         </a>
+        <PaypalChip lang={lang} />
         <div className="ms-auto flex min-w-0 items-center gap-1.5 sm:gap-2">
           <Badge variant={live ? "success" : "secondary"} className="hidden sm:inline-flex">{live ? "● LIVE" : (ar ? "معاينة تجريبية" : "Demo preview")}</Badge>
           <div className="w-[104px] shrink-0 sm:w-[132px]">

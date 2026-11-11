@@ -11,6 +11,7 @@ import { EmptyState, NoResultDiagnosis, ProductSkeletonGrid } from "@/components
 import { ModelTrace, STAGE_PRESETS, type TraceInfo } from "@/components/products/model-trace";
 import { TabModelMap } from "@/components/products/tab-model-map";
 import { VisionOverlay } from "@/components/products/vision-overlay";
+import { PaypalChip, PaypalMonogram, PaypalWordmark } from "@/components/brand/paypal-logo";
 import { StudioCompare } from "@/components/products/studio-compare";
 import type { Detection } from "@/lib/extract";
 import { blobToWav16k } from "@/lib/wav";
@@ -656,6 +657,7 @@ export default function Page() {
             <div className="flex flex-wrap gap-2">
               <Badge variant="gold">PayPal AI Hackathon · Indie</Badge>
               <Badge variant="accent">Vision · Listing · Studio · Voice + PayPal Checkout</Badge>
+              <PaypalChip lang={lang} />
             </div>
             <h1 className="mt-3 max-w-3xl text-balance text-[27px] font-black leading-[1.3] tracking-tight sm:text-4xl sm:leading-[1.2] lg:text-5xl">{ar ? <>من صورة واحدة لفرشة السوق إلى <span className="gradient-text">متجر جاهز للبيع في أقل من دقيقة</span></> : <>From one market-stall photo to a <span className="gradient-text">ready-to-sell store in under a minute</span></>}</h1>
             <p className="mt-2 max-w-2xl text-[13px] leading-7 text-white/85 sm:text-base">
@@ -1080,7 +1082,14 @@ export default function Page() {
               <p className="text-[11px] leading-5 opacity-80">{ar ? "IP مقنّع للخصوصية. S/L/I = عدد نداءات العزل والإعلانات والصور (وحدات الاستهلاك). السجل لآخر 100 تشغيل على هذه النسخة." : "IPs are masked for privacy. S/L/I = segmentation, listing and image call counts (usage units). Last 100 runs on this instance."}</p>
             </div>
           ) : null}
-          <span className="ms-auto hidden sm:inline">Next.js · shadcn/ui · Tailwind · PayPal Orders API + Model API</span>
+          <span className="ms-auto hidden items-center gap-2 sm:inline-flex">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-black/10 bg-white px-2.5 py-1 shadow-sm">
+              <span className="text-[11px] font-bold text-muted-foreground" style={{ color: "#5b6472" }}>{ar ? "الدفع عبر" : "Payments by"}</span>
+              <PaypalMonogram size={14} />
+              <PaypalWordmark className="text-[12px]" />
+            </span>
+            <span>Next.js · shadcn/ui · Tailwind · Model API</span>
+          </span>
         </footer>
       </main>
 
