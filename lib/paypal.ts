@@ -62,7 +62,8 @@ const SUPPORTED = new Set([
 
 export const paypalConfigured = () => CID.length > 10 && CSECRET.length > 10;
 export const paypalClientId = () => (paypalConfigured() ? CID : "");
-export const paypalEnv = () => ((process.env.PAYPAL_API_BASE ?? "").includes("sandbox") ? "sandbox" : "live");
+// Reflect the EFFECTIVE base: unset env falls back to the sandbox default.
+export const paypalEnv = () => ((process.env.PAYPAL_API_BASE ?? "https://api-m.sandbox.paypal.com").includes("sandbox") ? "sandbox" : "live");
 
 export type PaypalMoney = {
   currencyCode: string;

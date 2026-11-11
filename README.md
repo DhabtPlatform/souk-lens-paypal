@@ -82,8 +82,8 @@ npm test               # 28 unit tests: share links, economics, box parsing, rat
 
 **Testing access (free):**
 - **AI**: works with no key (demo mode). For live runs set `MODEL_API_KEY` + `MODEL_BASE_URL` (any OpenAI-compatible provider).
-- **PayPal**: create a free sandbox account at [developer.paypal.com](https://developer.paypal.com) → **Apps & Credentials → Sandbox** → copy the client id + secret into `.env`. Sandbox buyer test accounts are provided there too. Judges can also receive pre-made sandbox credentials through the submission form.
-- `GET /api/health` verifies both integrations are live without exposing secrets.
+- **PayPal — sandbox only for this submission, no real money moves.** Create a sandbox app at [developer.paypal.com](https://developer.paypal.com) → **Apps & Credentials → Sandbox** → copy the client id + secret into `.env` (the default `PAYPAL_API_BASE` already points at the sandbox). Sandbox **buyer** test accounts (to click through checkout) are provided under **Sandbox → Test Accounts**. To go live later: use live credentials AND set `PAYPAL_API_BASE=https://api-m.paypal.com` — mismatched pairs fail auth.
+- `GET /api/health` verifies both integrations are live without exposing secrets. Sandbox buyer credentials for judges are listed in [SUBMISSION.md](SUBMISSION.md).
 
 ## Where everything lives (nothing hidden)
 
