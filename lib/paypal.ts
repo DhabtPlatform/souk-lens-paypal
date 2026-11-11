@@ -106,7 +106,15 @@ async function accessToken(): Promise<string> {
     body: "grant_type=client_credentials",
     redirect: "error",
   });
-  if (!r.ok) throw new Error(`PayPal auth failed: ${r.status} ${(await r.text()).slice(0, 300)}`);
+  if (!r.ok) {
+    const t = (await r.text()).slice(0, 300);
+    if (r.status === 401 && t.includes("invalid_client")) {
+      // The #1 cause: credential/environment mismatch — sandbox creds need the
+      // sandbox base (the default), live creds need PAYPAL_API_BASE=live host.
+      throw new Error("PayPal auth failed (401 invalid_client): the client id/secret do not match PAYPAL_API_BASE. Sandbox credentials → keep the default sandbox base. Live credentials → set PAYPAL_API_BASE=https://api-m.paypal.com");
+    }
+    throw new Error(`PayPal auth failed: ${r.status} ${t}`);
+  }
   const j = (await r.json()) as { access_token: string; expires_in: number };
   cachedToken = { token: j.access_token, expires: Date.now() + (j.expires_in ?? 3000) * 1000 };
   return cachedToken.token;
