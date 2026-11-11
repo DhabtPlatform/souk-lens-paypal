@@ -141,7 +141,6 @@ export function PaypalButtons({
   const sourceSum = items.reduce((s, i) => s + i.unitPrice * i.qty, 0) + Math.max(0, shipping);
   const rate = cfg?.fxRate ?? 50;
   const needsConversion = cfg?.currency && currency.toUpperCase() !== cfg.currency.toUpperCase();
-
   if (!cfg) {
     return <div className="h-[52px] animate-pulse rounded-xl bg-muted" />;
   }
@@ -162,8 +161,8 @@ export function PaypalButtons({
       {needsConversion && (
         <p className="text-center text-xs font-bold text-muted-foreground">
           {ar
-            ? `المطلوب ${totalLabel} ← يتحصّل ${cfg.currency} ${(sourceSum * rate).toFixed(2)} — سعر تحويل معلن وثابت (${rate} ${currency}/${cfg.currency})`
-            : `${totalLabel} → charged as ${cfg.currency} ${(sourceSum * rate).toFixed(2)} — labeled fixed conversion (${rate} ${currency}/${cfg.currency})`}
+            ? `المطلوب ${totalLabel} ← يتحصّل ${cfg.currency} ${(sourceSum / rate).toFixed(2)} — سعر تحويل معلن وثابت (${rate} ${currency}/${cfg.currency})`
+            : `${totalLabel} → charged as ${cfg.currency} ${(sourceSum / rate).toFixed(2)} — labeled fixed conversion (${rate} ${currency}/${cfg.currency})`}
         </p>
       )}
       <div ref={ref} className="min-h-[52px]" />

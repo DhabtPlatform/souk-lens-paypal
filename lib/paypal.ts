@@ -81,16 +81,18 @@ export function isSupportedCurrency(code: string) {
 
 // Quantize first, then sum — so item_total always equals Σ unit_amount × qty
 // exactly, which PayPal's server-side validation requires.
-function q(amount: number, rate: number) {
-  return Math.round(amount * rate * 100) / 100;
+function q(amount: number, factor: number) {
+  return Math.round(amount * factor * 100) / 100;
 }
 
 export function toPaypalMoney(amount: number, sourceCurrency: string): PaypalMoney {
   const src = sourceCurrency.toUpperCase();
   const supported = isSupportedCurrency(src);
-  const rate = supported ? 1 : PAYPAL_FX_RATE;
+  // PAYPAL_FX_RATE is expressed as "source units per 1 PAYPAL_CURRENCY"
+  // (e.g. 50 EGP = 1 USD) — so source → target DIVIDES by it.
+  const factor = supported ? 1 : 1 / PAYPAL_FX_RATE;
   const code = supported ? src : PAYPAL_CURRENCY;
-  return { currencyCode: code, value: q(amount, rate).toFixed(2), converted: !supported, fxRate: rate, sourceCurrency: src };
+  return { currencyCode: code, value: q(amount, factor).toFixed(2), converted: !supported, fxRate: PAYPAL_FX_RATE, sourceCurrency: src };
 }
 
 // ---- OAuth token (cached in memory until expiry) -----------------------------
@@ -139,15 +141,16 @@ export async function createOrder(
 ) {
   if (!paypalConfigured()) throw new Error("PayPal is not configured — set PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET");
   const src = sourceCurrency.toUpperCase();
-  const rate = isSupportedCurrency(src) ? 1 : PAYPAL_FX_RATE;
-  const code = isSupportedCurrency(src) ? src : PAYPAL_CURRENCY;
+  const supported = isSupportedCurrency(src);
+  const factor = supported ? 1 : 1 / PAYPAL_FX_RATE; // source → target (divide by the labeled rate)
+  const code = supported ? src : PAYPAL_CURRENCY;
 
   // Quantize unit prices first so item_total == Σ unit_amount × qty exactly.
   const lineItems = items.slice(0, 50).map((i) => ({
     name: String(i.name).slice(0, 127),
     quantity: String(Math.max(1, Math.min(999, Math.round(i.qty)))),
     category: i.category ?? "PHYSICAL_GOODS",
-    unitAmount: q(i.unitPrice, rate),
+    unitAmount: q(i.unitPrice, factor),
   }));
   const itemTotal = lineItems.reduce((s, i) => s + i.unitAmount * Number(i.quantity), 0);
   const shippingQ = q(Math.max(0, shipping), rate);
@@ -196,8 +199,8 @@ export async function createOrder(
     shipping: shippingQ,
     total,
     currencyCode: code,
-    converted: rate !== 1,
-    fxRate: rate,
+    converted: !supported,
+    fxRate: PAYPAL_FX_RATE,
     sourceCurrency: src,
   };
 }
