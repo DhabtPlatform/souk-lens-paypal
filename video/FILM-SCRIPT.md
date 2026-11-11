@@ -45,13 +45,13 @@
 ---
 
 ## Shot checklist (real app footage only)
-- [ ] One-click demo run + proof bar (LIVE label)
+- [x] **SHOT Nov 11** — One-click demo run + proof bar (LIVE label) — 1920×1080 browser capture
 - [x] **VERIFIED Nov 11** — Box map tap → listing → Add to cart (Handmade brass lamp, 890 EGP cart)
 - [x] **VERIFIED Nov 11** — Cart → **PayPal sandbox buttons → popup → buyer login → review 17.80 USD (890÷50 exact) → CAPTURED id `SLM58587TG8887O9H`** ← the money shot
-- [ ] Buyer page PayPal button (single product)
-- [ ] Smart Market: preset → 3 lists → approve → invoice → add to cart
-- [ ] Seller dashboard after capture (revenue + stock moved)
-- [ ] `/api/health` response on screen
+- [x] **SHOT Nov 11** — Smart Market: preset → 3 lists → approve → invoice (1920×1080 browser capture)
+- [x] **SHOT Nov 11** — Seller dashboard (My products + profit reports)
+- [x] **SHOT Nov 11** — `/api/health` (ai + paypal reachable:true)
+- [x] **ASSEMBLED Nov 11** — `video/SOUK-LENS-FILM.mp4` (2:19, 1920×1080@30, on-screen captions, silent — upload publicly to YouTube for the Devpost form)
 
 ## Clean-recording rules for the popup scene (learned from the Nov 11 test take)
 
