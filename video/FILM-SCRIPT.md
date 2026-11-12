@@ -51,7 +51,7 @@
 - [x] **SHOT Nov 11** — Smart Market: preset → 3 lists → approve → invoice (1920×1080 browser capture)
 - [x] **SHOT Nov 11** — Seller dashboard (My products + profit reports)
 - [x] **SHOT Nov 11** — `/api/health` (ai + paypal reachable:true)
-- [x] **ASSEMBLED Nov 12** — `video/SOUK-LENS-FILM.mp4` (**1:50**, 1920×1080@30, **English VO** per scene + ambient bed, brand watermark lockup, step tags, zoom punches, fades; silent-safe captions burned in) — upload publicly to YouTube for the Devpost form
+- [x] **ASSEMBLED Nov 12** — `video/SOUK-LENS-FINAL.mp4` (**1:50**, 1920×1080@30, **English VO** per scene + ambient bed, brand watermark lockup, step tags, zoom punches, fades; silent-safe captions burned in) — upload publicly to YouTube for the Devpost form
 
 ## Delivered cut (Nov 12) — what each scene carries
 
