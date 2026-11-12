@@ -83,8 +83,9 @@ during October 2026 and is documented in the repo.
 
 ## Demo video
 
-⟨PASTE PUBLIC YOUTUBE LINK HERE — under 3 minutes, real app footage incl. the
-PayPal sandbox checkout⟩
+Local file in the repo: `video/SOUK-LENS-FINAL.mp4` (1:48, 1920×1080, English narration).
+
+⟨PASTE PUBLIC YOUTUBE LINK HERE — upload the file as **Public**, not unlisted⟩
 
 ## Repository (public, MIT)
 

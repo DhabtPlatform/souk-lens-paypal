@@ -110,8 +110,12 @@ npm test               # 28 unit tests: share links, economics, box parsing, rat
 
 ## Demo video
 
-Under 3 minutes, real app footage including the PayPal sandbox checkout:
-`video/` in this repo (script + captions + package) — mirrored on YouTube (public link in the Devpost submission).
+**[video/SOUK-LENS-FINAL.mp4](video/SOUK-LENS-FINAL.mp4)** — **1:48**, 1920×1080, 30 fps,
+English narration, chapter labels and captions burned in. Real footage of the deployed
+build: stall photo → segmentation → listings → the agent → **PayPal sandbox checkout
+(create → approve → capture)** → seller channels → rigor → close.
+YouTube link (public) is in the Devpost submission; thumbnail and the chapter map are in
+[`video/`](video/README.md).
 
 ## Brand
 

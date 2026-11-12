@@ -1,90 +1,62 @@
-# SOUK LENS — "SEE IT. SELL IT. PAY WITH PAYPAL."
-### The 2:50 engineering film — PayPal AI Hackathon
+# SOUK LENS — FILM NOTES (PayPal AI Hackathon cut, 1:48)
 
-**Format:** 1920×1080 · 25 fps · male English voice · no music, SFX only · end card shows only GitHub + PayPal sandbox note.
+The delivered film is `SOUK-LENS-FINAL.mp4`: 1920×1080, 30 fps, English narration,
+chapter labels top-left, captions bottom-left, live app footage throughout.
 
-**Thesis:** AI that writes listings is everywhere. AI that sells — and gets paid — is not. Souk Lens turns any market photo into priced listings and completes every sale through real PayPal checkout (Orders API: create → approve → capture).
-
----
-
-## 01 — THE PROBLEM · 0:00–0:20
-**VO:** Every informal market runs the same way: goods on a table, prices in someone's head, and sales settled by hand or chat messages. AI can describe a photo — but describing is not selling. Selling means a real checkout, a real capture, money that actually moves.
-
-**On screen:** real stall photo → "EVERY PRODUCT. ZERO LISTINGS. NO PAYMENTS." → segmentation map appears (neon boxes 01–06).
-
-## 02 — CAPTURE & ANALYZE · 0:20–0:50
-**VO:** One phone photo. Segmentation isolates every item into numbered boxes — real coordinates, not guesses. The listing AI prices each item in local currency and writes the full product: variants, stock, specs. The image model cleans the studio shot. Each model's time lands on the proof bar, labeled LIVE or DEMO.
-
-**On screen:** live analysis run → box map → product cards stacking → proof bar timings.
-
-## 03 — THE AGENT BUILDS THE CART · 0:50–1:15
-**VO:** On the buyer side, an agent does the shopping: state a need — "furnish a small apartment" — and it assembles three ranked lists from the store and the seller's saved products, moves items between lists, and turns the approved list into a preliminary invoice.
-
-**On screen:** Smart Market tab → 3 lists → approve → invoice (subtotal, savings, shipping, total).
-
-## 04 — PAYPAL CHECKOUT · 1:15–1:55  ★ THE SCENE
-**VO:** And this is where Souk Lens stops being a demo: the buyer pays with real PayPal. The gold buttons open PayPal itself — the buyer approves inside PayPal's window, and the server captures the payment through the Orders API. The capture id becomes the order. Stock decrements. The seller's report updates. No mock. No simulation. PayPal is the payment rail of the whole platform.
-
-**On screen:** cart with totals → PayPal gold buttons → sandbox popup approval → "CAPTURED" + capture id → order recorded toast → seller dashboard profit updates.
-
-## 05 — SELLER TRUTH · 1:55–2:20
-**VO:** The seller sees profit the honest way: revenue and costs from orders that were actually captured — never generated numbers. Every product converts to a channel: fixed price, auction with live bidding, live sale, or external campaign.
-
-**On screen:** profit report → auction conversion → bid simulation (labeled) → channels on the card.
-
-## 06 — RIGOR · 2:20–2:38
-**VO:** Everything is verifiable: /api/health reports the AI provider and PayPal reachability live — without exposing a single secret. Demo runs say DEMO. Sample data says sample. The one honest exception: when PayPal sandbox credentials are absent, the checkout shows exactly that instead of pretending.
-
-**On screen:** `GET /api/health` JSON (ai + paypal sections) → honesty labels.
-
-## 07 — CLOSE · 2:38–2:50
-**VO:** Souk Lens. See it. Sell it. Pay with PayPal.
-
-**On screen:** giant tagline → end card: SOUK LENS logo · github.com/DhabtPlatform/souk-lens-paypal · "Payments powered by PayPal Orders API (sandbox)" · AI voiceover disclosure.
+This file records what each chapter claims, so the submission text and the film can be
+checked against each other.
 
 ---
 
-## Shot checklist (real app footage only)
-- [x] **SHOT Nov 11** — One-click demo run + proof bar (LIVE label) — 1920×1080 browser capture
-- [x] **VERIFIED Nov 11** — Box map tap → listing → Add to cart (Handmade brass lamp, 890 EGP cart)
-- [x] **VERIFIED Nov 11** — Cart → **PayPal sandbox buttons → popup → buyer login → review 17.80 USD (890÷50 exact) → CAPTURED id `SLM58587TG8887O9H`** ← the money shot
-- [x] **SHOT Nov 11** — Smart Market: preset → 3 lists → approve → invoice (1920×1080 browser capture)
-- [x] **SHOT Nov 11** — Seller dashboard (My products + profit reports)
-- [x] **SHOT Nov 11** — `/api/health` (ai + paypal reachable:true)
-- [x] **ASSEMBLED Nov 12** — `video/SOUK-LENS-FINAL.mp4` (**1:50**, 1920×1080@30, **English VO** per scene + ambient bed, brand watermark lockup, step tags, zoom punches, fades; silent-safe captions burned in) — upload publicly to YouTube for the Devpost form
+## 01 — COLD OPEN · 0:00–0:12
+Real market-stall photograph; the line "EVERY MARKET STALL IS A STORE WAITING TO
+HAPPEN."; marker "REAL MARKET PHOTO"; caption "REAL STALL. REAL GOODS. NO LISTING."
+**Claim:** the demo starts from an unedited phone photo, not a prepared catalog.
 
-## Delivered cut (Nov 12) — what each scene carries
+## 02 — SEGMENTATION · 0:12–0:30
+The segmentation map with numbered regions, then the resulting product list.
+**Claim:** items are isolated with real model coordinates; each listing is bound to a
+numbered region of the same photo.
 
-| # | Scene | On screen | Audio |
-|---|---|---|---|
-| 01 | Title | Souk Lens mark + PayPal chip + tagline | VO: "One photo becomes a full priced listing…" |
-| 02 | Hero + click | live app, push-in | VO: "A live market stall…" |
-| 03 | Pipeline (7×) | sped capture, step tag | VO: "AI segments every item…" |
-| 04 | Grounded results | neon zoom punch into the map + proof bar LIVE | VO: "Every box is a real detection…" |
-| 05 | Agent lists | 3 ranked lists | VO: "Buyers say what they need…" |
-| 06 | Approve → invoice | invoice totals | VO: "Approve the list…" |
-| 07 | PayPal cart | gold buttons + conversion label | VO: "Checkout runs on real PayPal…" |
-| 08 | Capture | confirmation + capture id | VO: "The buyer approves inside PayPal…" |
-| 09 | Seller OS | profit reports | VO: "Profit only from captured orders…" |
-| 10 | Proof | `/api/health` live | VO: "Everything is verifiable, live." |
-| 11 | End card | repo + sandbox note + marks | VO: "See it. Sell it. Pay with PayPal." |
+## 03 — LISTING MODEL · 0:30–0:50
+Product cards with names, prices, variants, stock and specs.
+**Claim:** one photo produces complete, sellable listings — no typed fields.
 
-## Clean-recording rules for the popup scene (learned from the Nov 11 test take)
+## 04 — STUDIO + RELAY · 0:50–1:00
+The studio shot and the model trace with per-model timings.
+**Claim:** the pipeline is measured, not estimated; each stage is labeled live or demo.
 
-The Nov 11 test capture (Recording 2026-11-11 225020.mp4) proves the flow end-to-end
-but must NOT be used raw — it leaks private data on screen:
+## 05 — SMART MARKET · 1:00–1:15
+A stated need ("furnish an apartment"), the three ranked lists, the approved list and
+the preliminary invoice.
+**Claim:** the agent turns buying intent into an orderable cart with an invoice.
 
-- ❌ Browser password-manager dropdown showed **personal emails** (~0:10–0:14)
-- ❌ Windows clipboard-history panel showed the **sandbox password in plain text** (~0:15–0:20)
+## 06 — PAYPAL · 1:15–1:35
+Cart totals, the gold PayPal buttons, the sandbox review screen (17.80 USD, Test Store,
+sandbox buyer), then **CAPTURED**.
+**Claim:** checkout runs on the PayPal Orders API in the sandbox — create → approve →
+capture — and the capture is the order.
 
-Re-record the popup portion with:
-1. **F11 fullscreen** (hides tab bar/URL bar; the film frame is 1920×1080 — the test take is 1872×860)
-2. **Never open the password manager or Win+V clipboard panel on camera**
-3. Type the `sb-…@personal.example.com` buyer email manually; paste the password in one keystroke without opening any panel
-4. Keep on screen: the **conversion toast** ("charged as USD … labeled fixed conversion") and the **"PayPal sandbox" badge** — they are required honesty labels
-5. Golden shots to keep identical to the test take: the review screen (17.80 USD, John Doe, Test Store), the processing spinner, and the confirmation ("Paid with PayPal" + capture id + "order recorded in seller sales")
+## 07 — SELLER · 1:35–1:45
+The seller products view with cost/sales fields and the four channels (fixed, auction,
+live sale, campaign).
+**Claim:** captured orders feed seller numbers; one listing can be sold four ways.
 
-## Honesty rules for the film
-- Sandbox only — say it on screen ("PayPal sandbox").
-- AI voiceover disclosed on the end card; no music.
-- Show the conversion label once (EGP → USD labeled rate) — honesty is a feature.
+## 08 — RIGOR · 1:45–1:52
+`GET /api/health` and the LIVE / DEMO / SAMPLE labels.
+**Claim:** every integration claim is verifiable from the deployed build.
+
+## 09–10 — CLOSE
+The live site URL, the repo, the sandbox disclosure.
+**Claim:** everything in the film can be opened and checked by a judge.
+
+---
+
+## Rules this film obeys
+
+- **Sandbox only.** The checkout is PayPal sandbox; no real charges. The film states it.
+- **No invented data.** Sample inventory is labeled as sample; seller figures come from
+  in-app orders.
+- **Measured numbers.** Model timings come from real runs of the deployed build.
+- **One story.** Photo → listings → agent → PayPal → seller, in that order, with no
+  feature tour in between.
