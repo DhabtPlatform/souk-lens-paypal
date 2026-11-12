@@ -51,7 +51,23 @@
 - [x] **SHOT Nov 11** — Smart Market: preset → 3 lists → approve → invoice (1920×1080 browser capture)
 - [x] **SHOT Nov 11** — Seller dashboard (My products + profit reports)
 - [x] **SHOT Nov 11** — `/api/health` (ai + paypal reachable:true)
-- [x] **ASSEMBLED Nov 11** — `video/SOUK-LENS-FILM.mp4` (2:19, 1920×1080@30, on-screen captions, silent — upload publicly to YouTube for the Devpost form)
+- [x] **ASSEMBLED Nov 12** — `video/SOUK-LENS-FILM.mp4` (**1:50**, 1920×1080@30, **English VO** per scene + ambient bed, brand watermark lockup, step tags, zoom punches, fades; silent-safe captions burned in) — upload publicly to YouTube for the Devpost form
+
+## Delivered cut (Nov 12) — what each scene carries
+
+| # | Scene | On screen | Audio |
+|---|---|---|---|
+| 01 | Title | Souk Lens mark + PayPal chip + tagline | VO: "One photo becomes a full priced listing…" |
+| 02 | Hero + click | live app, push-in | VO: "A live market stall…" |
+| 03 | Pipeline (7×) | sped capture, step tag | VO: "AI segments every item…" |
+| 04 | Grounded results | neon zoom punch into the map + proof bar LIVE | VO: "Every box is a real detection…" |
+| 05 | Agent lists | 3 ranked lists | VO: "Buyers say what they need…" |
+| 06 | Approve → invoice | invoice totals | VO: "Approve the list…" |
+| 07 | PayPal cart | gold buttons + conversion label | VO: "Checkout runs on real PayPal…" |
+| 08 | Capture | confirmation + capture id | VO: "The buyer approves inside PayPal…" |
+| 09 | Seller OS | profit reports | VO: "Profit only from captured orders…" |
+| 10 | Proof | `/api/health` live | VO: "Everything is verifiable, live." |
+| 11 | End card | repo + sandbox note + marks | VO: "See it. Sell it. Pay with PayPal." |
 
 ## Clean-recording rules for the popup scene (learned from the Nov 11 test take)
 
