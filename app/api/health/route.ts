@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { assertPublicUrl } from "@/lib/egress";
-import { MODEL_IDS } from "@/lib/ai";
 import { paypalHealth } from "@/lib/paypal";
 
 // Operator-set provider URL — validated through the shared egress guard
@@ -45,7 +44,9 @@ export async function GET() {
     ok: true,
     mode: hasKey ? "live" : "demo",
     ai: {
-      models: MODEL_IDS,
+      // Stage names, not vendor model ids: the pipeline is described by what each
+      // stage does, so the public health check carries no provider branding.
+      stages: ["segmentation", "listing", "studio image", "voice"],
       keyConfigured: hasKey,
       apiReachable: reachable,
       apiLatencyMs: latencyMs,
